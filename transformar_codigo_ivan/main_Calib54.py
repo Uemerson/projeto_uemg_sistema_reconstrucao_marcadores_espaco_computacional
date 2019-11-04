@@ -1,9 +1,19 @@
 import CalibrationDLT
 import numpy as np
-import h5py
+import re
+import loadFile
 
-f = h5py.File('somefile.mat','r')
-data = f.get('data/variable1')
-data = np.array(data) # For converting to a NumPy array
+Calib1 = loadFile.load('coord/larissa/Calib1.mat')
+Calib2 = loadFile.load('coord/larissa/Calib2.mat')
+Calib3 = loadFile.load('coord/larissa/Calib3.mat')
+Calib4 = loadFile.load('coord/larissa/Calib4.mat')
 
-Calib1 = h5py.File('coord/larissa/Calib1.mat', 'r')
+GRID = loadFile.loadFloat('coord/Grid3.mat')
+
+CAM1_CALIB = CalibrationDLT.CalibrationDLT(np.transpose(Calib1), np.transpose(GRID))
+
+# print(Calib1)
+# print(np.transpose(Calib1))
+# CAM2_CALIB = CalibrationDLT.CalibrationDLT(np.transpose(Calib2), np.transpose(GRID))
+# CAM3_CALIB = CalibrationDLT(Calib3', GRID')
+# CAM4_CALIB = CalibrationDLT(Calib4', GRID')
